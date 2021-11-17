@@ -7,7 +7,8 @@ const getAll = async (page, amount, title, breed) => {
     .populate('breed')
     .skip(page * amount)
     .limit(amount);
-  return dogs;
+  const countAll = await Dog.count();
+  return { dogs, countAll };
 };
 
 module.exports = { getAll };
