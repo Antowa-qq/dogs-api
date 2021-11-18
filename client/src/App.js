@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Loader } from './components';
+
+import { Dogs } from './pages';
 
 function App() {
-  return <></>;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+  
+  return (
+    <>
+      {loading && <Loader />}
+      {!loading && <Dogs />}
+    </>
+  );
 }
 
 export default App;
