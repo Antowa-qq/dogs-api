@@ -12,6 +12,7 @@ const headCellsTable = [
 
 function Dogs() {
   const [query, setQuery] = useState({ page: 1, amount: 5, title: '', breed: null });
+  const [dataForm, setDataForm] = useState({ title: '', breed: null });
   const [data, setData] = useState({ breeds: [], dogs: [], countAll: 0 });
   const [loading, setLoading] = useState(true);
 
@@ -26,18 +27,18 @@ function Dogs() {
   const handleClickSearch = async (e) => {
     setLoading(true);
     e.preventDefault();
-    setQuery({ ...query, page: 1 });
-    const { dogs, countAll } = await getAllDogs({ ...query, page: 1 });
+    setQuery({ ...query, page: 1, ...dataForm });
+    const { dogs, countAll } = await getAllDogs({ ...query, page: 1, ...dataForm });
     setData({ ...data, dogs, countAll });
     setLoading(false);
   };
 
   const handleChangeFilterBreed = (value) => {
-    setQuery({ ...query, breed: value });
+    setDataForm({ ...dataForm, breed: value });
   };
 
   const handleChangeSearchDogTitle = (value) => {
-    setQuery({ ...query, title: value });
+    setDataForm({ ...dataForm, title: value });
   };
 
   useEffect(() => {
@@ -58,7 +59,7 @@ function Dogs() {
         <Grid container direction="row" justifyContent="center" spacing={1}>
           <Grid item>
             <Search
-              value={query.title}
+              value={dataForm.title}
               handleChange={(value) => {
                 handleChangeSearchDogTitle(value);
               }}
