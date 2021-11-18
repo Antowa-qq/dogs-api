@@ -1,13 +1,13 @@
 const { Dog } = require('../models');
 
-const getAll = async (page, amount, title, breed) => {
-  const dogs = await Dog.find({
-    $or: [{ breed }, { title: { $regex: `.*${title}.*` } }],
-  })
+const getAll = async (page, amount, query) => {
+  const dogs = await Dog.find(query)
     .populate('breed')
     .skip(page * amount)
     .limit(amount);
-  const countAll = await Dog.count();
+
+  const countAll = await Dog.find(query).count();
+
   return { dogs, countAll };
 };
 
