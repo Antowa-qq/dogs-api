@@ -1,8 +1,11 @@
 const getAllBreeds = async () => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1.0/breeds`, {
-      method: 'GET',
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1.0/breeds`,
+      {
+        method: 'GET',
+      }
+    );
 
     const {
       payload: { breeds },
@@ -14,4 +17,5 @@ const getAllBreeds = async () => {
   }
 };
 
+export { getAllBreeds };
 export { getAllBreeds };
